@@ -1,0 +1,17 @@
+[project]
+name = "daily-algorithm"
+version = "0.1.0"
+description = "My daily algorithm study repository"
+authors = [{ name = "VeritasForge", email = "greenfrog@outlook.kr" }]
+requires-python = ">=3.13"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+    "mypy",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["tests"] 
