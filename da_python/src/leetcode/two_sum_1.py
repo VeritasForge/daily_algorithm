@@ -30,12 +30,12 @@ Only one valid answer exists.
 Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
 """
 
-class Solution:
-    def twoSum(self, nums: list[int], target: int) -> list[int]:
-        pair: dict[int, int] = {}
-        for i, n in enumerate(nums): 
-            if n in pair:
-                return [pair[target - n], i]
-            pair[n] = i
 
-        return []
+def two_sum(nums: list[int], target: int) -> list[int]:
+    pair: dict[int, int] = {}
+    for i, n in enumerate(nums):
+        res = target - n
+        if res in pair:
+            return [pair[res], i]
+        pair[n] = i
+    return []
