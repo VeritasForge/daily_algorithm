@@ -6,10 +6,11 @@ authors = [{ name = "VeritasForge", email = "greenfrog@outlook.kr" }]
 requires-python = ">=3.13"
 dependencies = []
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
-    "pytest",
-    "ruff",
-    "mypy",
-    "pre-commit",
+    "ipython>=9.4.0",
+    "mypy>=1.16.1",
+    "pre-commit>=4.2.0",
+    "pytest>=8.4.1",
+    "ruff>=0.12.3",
 ]
