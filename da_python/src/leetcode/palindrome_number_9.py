@@ -28,29 +28,38 @@ Follow up: Could you solve it without converting the integer to a string?
 """
 
 
-class Solution:
-    def isPalindrome(self, x: int) -> bool:
-        return self._way_1(x)
+def is_palindrome(x: int) -> bool:
+    if x < 0 or (x % 10 == 0 and x != 0):
+        return False
 
-    def _way_1(self, x: int) -> bool:
-        if x < 0:
-            return False
+    reverted_number = 0
+    while reverted_number < x:
+        reverted_number = reverted_number * 10 + x % 10
+        x //= 10
 
-        reverted_number = 0
-        tmp = x
-        while tmp:
-            reverted_number = reverted_number * 10 + tmp % 10
-            tmp //= 10
+    return reverted_number == x or x == reverted_number // 10
 
-        return reverted_number == x
 
-    def _way_2(self, x: int) -> bool:
-        if x < 0 or (x % 10 == 0 and x != 0):
-            return False
+def _way_1(x: int) -> bool:
+    if x < 0:
+        return False
 
-        reverted_number = 0
-        while x > reverted_number:
-            reverted_number = reverted_number * 10 + x % 10
-            x //= 10
+    reverted_number = 0
+    tmp = x
+    while tmp:
+        reverted_number = reverted_number * 10 + tmp % 10
+        tmp //= 10
 
-        return x == reverted_number or x == reverted_number // 10
+    return reverted_number == x
+
+
+def _way_2(x: int) -> bool:
+    if x < 0 or (x % 10 == 0 and x != 0):
+        return False
+
+    reverted_number = 0
+    while x > reverted_number:
+        reverted_number = reverted_number * 10 + x % 10
+        x //= 10
+
+    return x == reverted_number or x == reverted_number // 10
