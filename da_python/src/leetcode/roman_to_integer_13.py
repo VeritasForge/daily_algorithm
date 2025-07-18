@@ -50,7 +50,8 @@ It is guaranteed that s is a valid roman numeral in the range [1, 3999].
 
 def roman_to_integer(s: str) -> int:
     # return way_1(s)
-    return way_2(s)
+    # return way_2(s)
+    return way_3(s)
 
 
 def way_1(s: str) -> int:
@@ -105,3 +106,24 @@ def way_2(s: str) -> int:
         prev_value = value
 
     return result
+
+
+def way_3(s: str) -> int:
+    roman_map = {
+        "I": 1,
+        "V": 5,
+        "X": 10,
+        "L": 50,
+        "C": 100,
+        "D": 500,
+        "M": 1000,
+    }
+
+    result = 0
+    for a, b in zip(s, s[1:]):
+        if roman_map[a] < roman_map[b]:
+            result -= roman_map[a]
+        else:
+            result += roman_map[a]
+
+    return result + roman_map[s[-1]]
