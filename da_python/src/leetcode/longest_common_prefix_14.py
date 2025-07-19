@@ -56,7 +56,7 @@ def way_2(strs):
     #         common_prefix.append(chrs[0])
     # return "".join(common_prefix)
 
-    return "".join([items[0] for items in zip(*strs) if len(set(items)) == 1])
+    return "".join(items[0] for items in zip(*strs) if len(set(items)) == 1)
 
 
 def way_3(strs):
@@ -69,5 +69,5 @@ def way_3(strs):
     # return "".join(common_prefix)
 
     return "".join(
-        [items[0] for items in zip(*strs) if all(c == items[0] for c in items[1:])]
+        items[0] for items in zip(*strs) if all(c == items[0] for c in items[1:])
     )
