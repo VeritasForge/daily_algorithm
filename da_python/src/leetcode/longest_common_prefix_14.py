@@ -27,8 +27,12 @@ strs[i] consists of only lowercase English letters if it is non-empty.
 
 
 def longest_common_prefix(strs):
-    min_s = min(strs, key=lambda x: len(x))
+    return way_3(strs)
 
+
+def way_1(strs):
+    print(" > way 1")
+    min_s = min(strs, key=lambda x: len(x))
     for i, s in enumerate(strs):
         if min_s == s:
             continue
@@ -41,5 +45,29 @@ def longest_common_prefix(strs):
             common_prefix.append(c)
 
         min_s = "".join(common_prefix)
-
     return min_s
+
+
+def way_2(strs):
+    print(" > way 2")
+    # common_prefix = []
+    # for chrs in zip(*strs):
+    #     if len(set(chrs)) == 1:
+    #         common_prefix.append(chrs[0])
+    # return "".join(common_prefix)
+
+    return "".join([items[0] for items in zip(*strs) if len(set(items)) == 1])
+
+
+def way_3(strs):
+    print(" > way 3")
+    # common_prefix = []
+    # for chrs in zip(*strs):
+    #     first_ch = chrs[0]
+    #     if all(first_ch == c for c in chrs[1:]):
+    #         common_prefix.append(first_ch)
+    # return "".join(common_prefix)
+
+    return "".join(
+        [items[0] for items in zip(*strs) if all(c == items[0] for c in items[1:])]
+    )
