@@ -52,11 +52,17 @@ def way_2(strs):
     print(" > way 2")
     # common_prefix = []
     # for chrs in zip(*strs):
-    #     if len(set(chrs)) == 1:
-    #         common_prefix.append(chrs[0])
+    #     if len(set(chrs)) != 1:
+    #         break
+    #     common_prefix.append(chrs[0])
+    #
     # return "".join(common_prefix)
 
-    return "".join(items[0] for items in zip(*strs) if len(set(items)) == 1)
+    from itertools import takewhile
+
+    return "".join(
+        items[0] for items in takewhile(lambda items: len(set(items)) == 1, zip(*strs))
+    )
 
 
 def way_3(strs):
@@ -68,6 +74,11 @@ def way_3(strs):
     #         common_prefix.append(first_ch)
     # return "".join(common_prefix)
 
+    from itertools import takewhile
+
     return "".join(
-        items[0] for items in zip(*strs) if all(c == items[0] for c in items[1:])
+        items[0]
+        for items in takewhile(
+            lambda items: all(items[0] == item for item in items[1:]), zip(*strs)
+        )
     )
