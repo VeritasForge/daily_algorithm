@@ -13,9 +13,10 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     // JUnit 5 Jupiter API
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0") // 최신 버전 확인 필요
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.0")
     // JUnit 5 Jupiter Engine (런타임 시 필요)
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0") // 최신 버전 확인 필요
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
 }
 
 tasks.test {
