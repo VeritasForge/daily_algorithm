@@ -48,7 +48,7 @@ Constraints:
 s consists of parentheses only '()[]{}'.
 """
 
-closed_parethese = {
+parentheses_map = {
     "(": ")",
     "[": "]",
     "{": "}",
@@ -56,14 +56,11 @@ closed_parethese = {
 
 
 def is_valid(s: str) -> bool:
-    stack: list[str] = []
+    stack: list[str | None] = []
     for c in s:
-        if not stack or c in closed_parethese:
-            stack.append(closed_parethese[c])
-        else:
-            if c == stack[-1]:
-                stack.pop()
-            else:
-                return False
+        if not stack or c in parentheses_map:
+            stack.append(parentheses_map.get(c))
+        elif c != stack.pop():
+            return False
 
     return not stack
