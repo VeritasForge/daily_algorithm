@@ -1,6 +1,6 @@
 import pytest
 
-from src.leetcode.merge_two_sorted_list_21 import ListNode, node_to_list
+from src.leetcode.merge_two_sorted_list_21 import ListNode, merge_two_list, node_to_list
 
 
 def create_node(*args) -> ListNode | None:
@@ -49,21 +49,24 @@ def test_node_to_list(node: ListNode | None, expected: list[int] | None):
     assert result == expected
 
 
-# @pytest.mark.parametrize(
-#     "a, b, expected",
-#     [
-#         (create_node(1, 2, 4), create_node(1, 3, 4), [1, 1, 2, 3, 4, 4]),
-#         # (create_node(), create_node(), [1, 2, 3, 4, 4]),
-#     ]
-# )
-# def test_merge_two_list(a: ListNode | None, b: ListNode | None, expected: list[int] | None):
-#     # When:
-#     result = merge_two_list(a, b)
-#
-#     # Then:
-#     result_as_list = []
-#     while result:
-#         result_as_list.append(result.val)
-#         result = result.next_node
-#
-#     assert result_as_list == expected
+@pytest.mark.parametrize(
+    "a, b, expected",
+    [
+        (create_node(1, 2, 4), create_node(1, 3, 4), [1, 1, 2, 3, 4, 4]),
+        (create_node(), create_node(), []),
+        (create_node(), create_node(0), [0]),
+    ],
+)
+def test_merge_two_list(
+    a: ListNode | None, b: ListNode | None, expected: list[int] | None
+):
+    # When:
+    result = merge_two_list(a, b)
+
+    # Then:
+    result_as_list = []
+    while result:
+        result_as_list.append(result.val)
+        result = result.next_node
+
+    assert result_as_list == expected

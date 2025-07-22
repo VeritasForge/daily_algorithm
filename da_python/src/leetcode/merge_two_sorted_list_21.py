@@ -39,7 +39,7 @@ class ListNode:
         self.next_node = next_node
 
 
-def node_to_list(node: ListNode | None) -> list[int] | None:
+def node_to_list(node: ListNode | None) -> list[int]:
     as_list: list[int] = []
     if node is None:
         return as_list
@@ -53,28 +53,19 @@ def node_to_list(node: ListNode | None) -> list[int] | None:
 
 
 def merge_two_list(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
-    pass
-    # if not list1 and not list2:
-    #     return None
-    #
-    # arr = node_to_list(list1)
-    # arr += node_to_list(list2)
-    #
-    # while list1:
-    #     arr.append(list1.val)
-    #     list1 = list1.next_node
-    #
-    # while list2:
-    #     arr.append(list2.val)
-    #     list2 = list2.next_node
-    #
-    # if not arr:
-    #     return None
-    #
-    # arr.sort()
-    #
-    # result = head = ListNode(val=arr[0])
-    # for v in arr[1:]:
-    #     head.next_node = head = ListNode(val=v)
-    #
-    # return result
+    if not list1 and not list2:
+        return None
+
+    arr = node_to_list(list1)
+    arr += node_to_list(list2)
+
+    if not arr:
+        return None
+
+    arr.sort()
+
+    result = head = ListNode(val=arr[0])
+    for v in arr[1:]:
+        head.next_node = head = ListNode(val=v)
+
+    return result
