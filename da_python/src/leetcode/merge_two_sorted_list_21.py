@@ -53,6 +53,10 @@ def node_to_list(node: ListNode | None) -> list[int]:
 
 
 def merge_two_list(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
+    return way_2(list1, list2)
+
+
+def way_1(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
     if not list1 and not list2:
         return None
 
@@ -69,3 +73,17 @@ def merge_two_list(list1: ListNode | None, list2: ListNode | None) -> ListNode |
         head.next_node = head = ListNode(val=v)
 
     return result
+
+
+def way_2(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
+    result = head = ListNode()
+    while list1 and list2:
+        if list1.val < list2.val:
+            head.next_node = list1
+            list1 = list1.next_node
+        else:
+            head.next_node = list2
+            list2 = list2.next_node
+        head = head.next_node
+    head.next_node = list1 or list2
+    return result.next_node
