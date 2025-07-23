@@ -48,6 +48,10 @@ nums is sorted in non-decreasing order.
 
 
 def remove_duplicates(nums: list[int]) -> int:
+    return way_2(nums)
+
+
+def way_1(nums: list[int]) -> int:
     idx = 0
     while idx + 1 < len(nums):
         if nums[idx] == nums[idx + 1]:
@@ -56,3 +60,13 @@ def remove_duplicates(nums: list[int]) -> int:
             idx += 1
 
     return len(nums)
+
+
+def way_2(nums: list[int]) -> int:
+    i = 0
+    for j in range(1, len(nums)):
+        if nums[i] != nums[j]:
+            i += 1
+            nums[i] = nums[j]
+
+    return i + 1

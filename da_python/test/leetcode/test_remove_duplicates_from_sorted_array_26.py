@@ -18,4 +18,4 @@ def test_remove_duplicates(nums: list[int], expected: list[int]):
     assert len(expected) == k
 
     # And: 중복을 in-place로 제거한 nums의 데이터 검증
-    assert nums == expected
+    assert nums[:k] == expected
