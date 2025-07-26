@@ -7,6 +7,8 @@ from src.leetcode.remove_element_27 import remove_element
     "nums, val, expected",
     [
         ([3, 2, 2, 3], 3, [2, 2]),
+        ([2, 2, 3, 3], 3, [2, 2]),
+        ([3, 3, 2, 2], 3, [2, 2]),
         ([0, 1, 2, 2, 3, 0, 4, 2], 2, [0, 1, 3, 0, 4]),
     ],
 )
