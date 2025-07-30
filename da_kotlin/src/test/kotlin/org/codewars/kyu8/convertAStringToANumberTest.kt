@@ -1,4 +1,4 @@
-package org.example.org.codewars.kyu8
+package org.codewars.kyu8
 
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.api.Assertions.assertEquals

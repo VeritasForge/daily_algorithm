@@ -1,4 +1,4 @@
-package org.example.org.codewars.kyu8
+package org.codewars.kyu8
 
 
 //fun stringToNumber(str: String): Int {
