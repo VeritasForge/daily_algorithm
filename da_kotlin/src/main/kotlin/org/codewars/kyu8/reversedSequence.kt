@@ -8,4 +8,6 @@ package org.codewars.kyu8
  * Example : n=5 --> [5,4,3,2,1]
  *
  */
-fun reversedSequence(n: Int): List<Int> = (n downTo 1).toList()
+//fun reversedSequence(n: Int): List<Int> = (n downTo 1).toList()
+//fun reversedSequence(n: Int): List<Int> = n.downTo(1) .toList()
+fun reversedSequence(n: Int): List<Int> = List(n) { n - it }
