@@ -37,6 +37,7 @@ test/kotlin/org/codewars.kyu8/convertNumberToReversedArrayOfDigitsTest.kt 파일
 - 이때, 파일이름은 Kata의 제목을 통해서 만들어주고,
 - 소스 코드에는 만들어야 하는 빈 함수를 만들어줘. 내가 여기에 알고리즘을 구현할꺼야.
   - 보통 Kata들은 클래스에 메소드를 구현하는 방식으로 알려주지만, 그냥 함수만 만들어줘.
+  - 소스 코드를 만든 후에는 코드의 상단에 문제의 URL과 함께 문제 내용을 주석으로 표현해줘. src/org/codewars/kyu8/abbreivateTwoWordName.kt 파일의 상단 주석을 참조해줘.
 - Parametrize 테스트를 하는 테스트 코드를 만들어줘.
   - Parametrize의 source는 MethodSource를 사용할거야.
   - MethodSource는 **companion object로 구현하지 말고**, `@TestInstance(TestInstance.Lifecycle.PER_CLASS)`를 사용하고 private method로 테스트 메소드 위에 작성을 해줘. 이게 좀 더 가독성이 높아서 이렇게 사용하려고.
