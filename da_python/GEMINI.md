@@ -38,3 +38,5 @@ test/leetcode/test_two_sum_1.py 파일을 만들어줘.
   - 보통 문제들은 클래스에 메소드를 구현하는 방식으로 알려주지만, 그냥 함수만 만들어줘.
   - 소스 코드를 만든 후에는 코드의 상단에 문제의 URL과 함께 문제의 제목과 내용을 주석으로 표현해줘. src/leetcode/two_sum_1.py 파일의 상단 주석을 참조해줘.
 - Parametrize 테스트를 하는 테스트 코드를 만들어줘.
+- type hint를 줄때 PEP 484 (https://peps.python.org/pep-0484/)를 따라줘.
+  - 예를들어 3.9 이전 버전 에서는 `from typing import List`를 사용했다면 3.9 버전 부터는 에서는 에 정의한대로 그냥 list 를 사용하면 돼.
