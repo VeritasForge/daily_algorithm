@@ -33,17 +33,15 @@ Constraints:
 digits does not contain any leading 0's.
 """
 
-from typing import List
 
-
-def plus_one(digits: List[int]) -> List[int]:
+def plus_one(digits: list[int]) -> list[int]:
     """
     Increments the large integer by one and returns the resulting array of digits.
     """
-    return way1(digits)
+    return way2(digits)
 
 
-def way1(digits):
+def way1(digits: list[int]):
     num = 0
     for i, v in enumerate(digits):
         num += 10 ** (len(digits) - 1 - i) * v
@@ -59,3 +57,15 @@ def way1(digits):
         num -= divisor * quotient
 
     return result
+
+
+def way2(digits: list[int]):
+    for i in range(len(digits) - 1, -1, -1):
+        result = digits[i] + 1
+        if result < 10:
+            digits[i] = result
+            return digits
+
+        digits[i] = 0
+
+    return [1] + digits
