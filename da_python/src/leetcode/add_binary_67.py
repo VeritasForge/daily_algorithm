@@ -25,7 +25,7 @@ Each string does not contain leading zeros except for the zero itself.
 
 
 def add_binary(a: str, b: str) -> str:
-    return way2(a, b)
+    return way3(a, b)
 
 
 def way1(a: str, b: str) -> str:
@@ -66,3 +66,23 @@ def way2(a: str, b: str) -> str:
         stack.append(1)
 
     return "".join(str(stack[i]) for i in range(len(stack) - 1, -1, -1))
+
+
+def way3(a: str, b: str) -> str:
+    carry = 0
+    res = []
+
+    a_idx, b_idx = len(a) - 1, len(b) - 1
+
+    while a_idx >= 0 or b_idx >= 0 or carry:
+        if a_idx >= 0:
+            carry += int(a[a_idx])
+            a_idx -= 1
+        if b_idx >= 0:
+            carry += int(b[b_idx])
+            b_idx -= 1
+
+        res.append(str(carry % 2))
+        carry = carry // 2
+
+    return "".join(res[::-1])
