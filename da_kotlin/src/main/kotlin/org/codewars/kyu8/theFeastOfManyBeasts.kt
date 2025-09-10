@@ -16,4 +16,5 @@
 
 package org.codewars.kyu8
 
-fun feast(beast: String, dish: String): Boolean = beast.first() == dish.first() && beast.last() == dish.last()
+//fun feast(beast: String, dish: String): Boolean = beast.first() == dish.first() && beast.last() == dish.last()
+fun feast(beast: String, dish: String): Boolean = beast.startsWith(dish.first()) && beast.endsWith(dish.last())
