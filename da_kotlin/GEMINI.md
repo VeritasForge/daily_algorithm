@@ -53,7 +53,7 @@ main/kotlin/org/codewars.kyu8/convertNumberToReversedArrayOfDigits.kt 파일을 
 test/kotlin/org/codewars.kyu8/convertNumberToReversedArrayOfDigitsTest.kt 파일을 만들어줘.
 
 - 이때, 파일이름은 Kata의 제목을 통해서 만들어주고,
-- 소스 코드에는 만들어야 하는 빈 함수를 만들어줘. 내가 여기에 알고리즘을 구현할꺼야.
+- 소스 코드에는 만들어야 하는 **반드시 빈 함수**를 만들어줘. 내가 여기에 알고리즘을 구현할꺼야.
   - 보통 Kata들은 클래스에 메소드를 구현하는 방식으로 알려주지만, 그냥 함수만 만들어줘.
   - 소스 코드를 만든 후에는 코드의 상단에 문제의 URL과 함께 문제 제목과 내용을 주석으로 표현해줘. src/org/codewars/kyu8/abbreivateTwoWordName.kt 파일의 상단 주석을 참조해줘.
 - Parametrize 테스트를 하는 테스트 코드를 만들어줘.
