@@ -18,4 +18,4 @@
  */
 package org.codewars.kyu8
 
-const val STRANGE_STRING = "ㅇ"
+const val STRANGE_STRING = "ß"
