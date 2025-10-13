@@ -17,4 +17,5 @@
 
 package org.codewars.kyu8
 
-fun String.isUpperCase(): Boolean = this.none { it.isLowerCase() }
+//fun String.isUpperCase(): Boolean = none { it.isLowerCase() }
+fun String.isUpperCase(): Boolean = this == uppercase()
