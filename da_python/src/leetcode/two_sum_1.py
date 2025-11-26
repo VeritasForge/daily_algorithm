@@ -32,10 +32,19 @@ Follow-up: Can you come up with an algorithm that is less than O(n2) time comple
 
 
 def two_sum(nums: list[int], target: int) -> list[int]:
-    pair: dict[int, int] = {}
+    repo: dict[int, int] = {}
     for i, n in enumerate(nums):
-        res = target - n
-        if res in pair:
-            return [pair[res], i]
-        pair[n] = i
+        if n in repo:
+            return [repo[n], i]
+        repo[target - n] = i
     return []
+
+
+# def two_sum(nums: list[int], target: int) -> list[int]:
+#     pair: dict[int, int] = {}
+#     for i, n in enumerate(nums):
+#         res = target - n
+#         if res in pair:
+#             return [pair[res], i]
+#         pair[n] = i
+#     return []
