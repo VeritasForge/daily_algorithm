@@ -12,6 +12,7 @@ from src.leetcode.valid_paretheses_20 import is_valid
         ("(]", False),
         ("([)]", False),
         ("]", False),
+        (")(()))", False),
     ],
 )
 def test_is_valid(s, expected):
