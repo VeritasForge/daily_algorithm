@@ -51,7 +51,8 @@ def _using_two_point(s: str) -> bool:
     filtered_str = re.sub("[^0-9a-zA-Z]", "", s).lower()
     left, right = 0, len(filtered_str) - 1
 
-    for _ in range(len(filtered_str) // 2):
+    # for _ in range(len(filtered_str) // 2):
+    while left < right:
         if filtered_str[left] != filtered_str[right]:
             return False
 
