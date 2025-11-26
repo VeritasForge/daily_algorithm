@@ -1,6 +1,7 @@
 from __future__ import annotations
 from collections import deque
-from dataclasses import dataclass
+from src.common.tree import TreeNode
+
 
 """
 https://leetcode.com/problems/maximum-depth-of-binary-tree/
@@ -10,14 +11,6 @@ Given the root of a binary tree, return its maximum depth.
 
 A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
 """
-
-
-# Definition for a binary tree node.
-@dataclass
-class TreeNode:
-    val: int
-    left: TreeNode | None = None
-    right: TreeNode | None = None
 
 
 def max_depth(root: TreeNode | None) -> int:
