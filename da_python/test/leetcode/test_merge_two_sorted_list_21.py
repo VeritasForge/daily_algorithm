@@ -1,60 +1,19 @@
 import pytest
 
-from src.leetcode.merge_two_sorted_list_21 import ListNode, merge_two_list, node_to_list
-
-
-def create_node(*args) -> ListNode | None:
-    if not args:
-        return None
-
-    result = head = ListNode(val=args[0])
-    for val in args[1:]:
-        head.next_node = head = ListNode(val=val)
-    return result
-
-
-@pytest.mark.parametrize(
-    "arr",
-    [
-        [1, 2, 3],
-        [1, 2],
-        [1, 1],
-        [1],
-        [],
-    ],
-)
-def test_create_node(arr):
-    # When:
-    result = create_node(*arr)
-
-    # Then:
-    for v in arr:
-        assert result.val == v
-        result = result.next_node
-
-
-@pytest.mark.parametrize(
-    "node, expected",
-    [
-        (create_node(1, 2, 3), [1, 2, 3]),
-        (create_node(1, 1), [1, 1]),
-        (None, []),
-    ],
-)
-def test_node_to_list(node: ListNode | None, expected: list[int] | None):
-    # When:
-    result = node_to_list(node)
-
-    # Then:
-    assert result == expected
+from src.common.linked_list import create_linked_list
+from src.leetcode.merge_two_sorted_list_21 import ListNode, merge_two_list
 
 
 @pytest.mark.parametrize(
     "a, b, expected",
     [
-        (create_node(1, 2, 4), create_node(1, 3, 4), [1, 1, 2, 3, 4, 4]),
-        (create_node(), create_node(), []),
-        (create_node(), create_node(0), [0]),
+        (
+            create_linked_list([1, 2, 4]),
+            create_linked_list([1, 3, 4]),
+            [1, 1, 2, 3, 4, 4],
+        ),
+        (create_linked_list([]), create_linked_list([]), []),
+        (create_linked_list([]), create_linked_list([0]), [0]),
     ],
 )
 def test_merge_two_list(

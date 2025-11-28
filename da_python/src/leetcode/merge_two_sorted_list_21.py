@@ -1,3 +1,5 @@
+from src.common.linked_list import ListNode, create_list
+
 """
 21. Merge Two Sorted Lists
 https://leetcode.com/problems/merge-two-sorted-lists
@@ -32,26 +34,6 @@ Both list1 and list2 are sorted in non-decreasing order.
 """
 
 
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next_node=None):
-        self.val = val
-        self.next_node = next_node
-
-
-def node_to_list(node: ListNode | None) -> list[int]:
-    as_list: list[int] = []
-    if node is None:
-        return as_list
-
-    head = node
-    while head:
-        as_list.append(head.val)
-        head = head.next_node
-
-    return as_list
-
-
 def merge_two_list(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
     return way_2(list1, list2)
 
@@ -60,8 +42,8 @@ def way_1(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
     if not list1 and not list2:
         return None
 
-    arr = node_to_list(list1)
-    arr += node_to_list(list2)
+    arr = create_list(list1)
+    arr += create_list(list2)
 
     if not arr:
         return None
