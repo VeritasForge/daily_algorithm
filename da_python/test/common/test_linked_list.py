@@ -17,7 +17,7 @@ class TestCreateLinkedList:
         for n in nums:
             assert head is not None
             assert head.val == n
-            head = head.next_node
+            head = head.next
 
         assert head is None
 

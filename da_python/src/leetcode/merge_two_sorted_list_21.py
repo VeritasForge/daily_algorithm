@@ -52,7 +52,7 @@ def way_1(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
 
     result = head = ListNode(val=arr[0])
     for v in arr[1:]:
-        head.next_node = head = ListNode(val=v)
+        head.next = head = ListNode(val=v)
 
     return result
 
@@ -61,11 +61,11 @@ def way_2(list1: ListNode | None, list2: ListNode | None) -> ListNode | None:
     result = head = ListNode()
     while list1 and list2:
         if list1.val < list2.val:
-            head.next_node = list1
-            list1 = list1.next_node
+            head.next = list1
+            list1 = list1.next
         else:
-            head.next_node = list2
-            list2 = list2.next_node
-        head = head.next_node
-    head.next_node = list1 or list2
-    return result.next_node
+            head.next = list2
+            list2 = list2.next
+        head = head.next
+    head.next = list1 or list2
+    return result.next

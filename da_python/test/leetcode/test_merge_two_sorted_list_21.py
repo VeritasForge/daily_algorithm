@@ -26,6 +26,6 @@ def test_merge_two_list(
     result_as_list = []
     while result:
         result_as_list.append(result.val)
-        result = result.next_node
+        result = result.next
 
     assert result_as_list == expected

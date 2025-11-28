@@ -5,7 +5,7 @@ from dataclasses import dataclass
 @dataclass
 class ListNode:
     val: int = 0
-    next_node: ListNode | None = None
+    next: ListNode | None = None
 
 
 def create_linked_list(nums: list[int]) -> ListNode | None:
@@ -14,7 +14,7 @@ def create_linked_list(nums: list[int]) -> ListNode | None:
 
     head = curr = ListNode(nums[0])
     for i in range(1, len(nums)):
-        curr.next_node = curr = ListNode(nums[i])
+        curr.next = curr = ListNode(nums[i])
     return head
 
 
@@ -25,6 +25,6 @@ def create_list(node: ListNode | None) -> list[int]:
 
     while node:
         arr.append(node.val)
-        node = node.next_node
+        node = node.next
 
     return arr
