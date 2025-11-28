@@ -1,42 +1,117 @@
+# LeetCode 알고리즘 연습 프로젝트
 
-[질문에 대한 답변을 줄 때 고려할 부분]
+Python으로 알고리즘 문제를 풀이하고 학습하는 프로젝트입니다.
 
-- Python 개발의 최고 전문가처럼 사고하여 문제 분석을 시작합시다.
-- 질문과 관련된 모든 요소와 방법론을 고려해야 합니다.
-- 다음 관점을 고려합니다.
-    - 소트프웨어 개발
-    - OOP
-    - Functional Programming
-    - DDD
-    - Clean Architecture
-    - Port And Adapter
-    - Python
-    - TDD
-    - DBA 및 쿼리 전문가
-    - RebbitMQ 전문가
-    - 전문 DevOps 엔지니어
-    - **반드시 비교해줘야해!! Kotlin 및 Golang과의 비교**
-- 각 관점별 장단점은 무엇인지 정리합니다.
-- 해결책을 제안하기 전에, 먼저 이 문제의 근본 원인과 모든 잠재적인 기본 가정을 식별해야 합니다.
-- 답변의 어떤 부분이라도 불확실하다면, 그 불확실성을 명확히 밝히고 이유를 설명합니다.
-- 설명마다 참조 링크도 포함합니다.
-- 반드시 작성되는 모든 코드가 Pythonic한지 확인해야합니다.
+## 프로젝트 구조
 
-[명령]
+```
+da_python/
+├── src/
+│   ├── common/          # 공통 자료구조 및 유틸리티
+│   │   ├── linked_list.py
+│   │   └── tree.py
+│   └── leetcode/        # LeetCode 문제 풀이
+│       └── {문제명}_{번호}.py
+└── test/
+    ├── common/          # 공통 유틸리티 테스트
+    └── leetcode/        # 문제 풀이 테스트
+        └── test_{문제명}_{번호}.py
+```
 
-1. LeetCode의 URL을 프로프트에 전달하고 go 라는 명령을 붙이면 다음과 같이 동작을 해줘.
+## 코드 스타일
 
-URL의 내용을 읽어서 src.leetcode와 test.leetcode에 소스 파일과 테스트 파일을 만들어줘.
+- **Type Hint**: PEP 484 준수, Python 3.9+ 스타일 사용
+  - `list[int]` (O) / `List[int]` (X)
+  - `TreeNode | None` (O) / `Optional[TreeNode]` (X)
+- **Pythonic 코드**: 간결하고 가독성 좋은 Python 관용구 사용
+- **mypy 타입 체크 통과**: 모든 코드는 타입 에러 없이 작성
 
-예를들어, Prompt에 https://leetcode.com/problems/two-sum/ go 를 입력하면,
+## 명령어
 
-src/leetcode/two_sum_1.py 파일을 만들고,
-test/leetcode/test_two_sum_1.py 파일을 만들어줘.
+### `go` - LeetCode 문제 스캐폴딩
 
-- 이때, 파일이름은 문제의 제목을 통해서 만들어주고,
-- **소스 코드에는 만들어야 하는 빈 함수를 만들어줘. 내가 여기에 알고리즘을 구현할꺼야.**
-  - 보통 문제들은 클래스에 메소드를 구현하는 방식으로 알려주지만, 그냥 함수만 만들어줘.
-  - 소스 코드를 만든 후에는 코드의 상단에 문제의 URL과 함께 문제의 제목과 내용을 주석으로 표현해줘. src/leetcode/two_sum_1.py 파일의 상단 주석을 참조해줘.
-- Parametrize 테스트를 하는 테스트 코드를 만들어줘.
-- type hint를 줄때 PEP 484 (https://peps.python.org/pep-0484/)를 따라줘.
-  - 예를들어 3.9 이전 버전 에서는 `from typing import List`를 사용했다면 3.9 버전 부터는 에서는 에 정의한대로 그냥 list 를 사용하면 돼.
+LeetCode URL과 함께 `go` 명령을 입력하면 소스 파일과 테스트 파일을 자동 생성합니다.
+
+**사용법**:
+```
+https://leetcode.com/problems/two-sum/ go
+```
+
+**생성 결과**:
+- `src/leetcode/two_sum_1.py` - 문제 설명 주석 + 빈 함수
+- `test/leetcode/test_two_sum_1.py` - parametrize 테스트
+
+**규칙**:
+- 파일명: `{문제_제목}_{문제_번호}.py` (snake_case)
+- 소스 파일 상단에 문제 URL, 제목, 설명을 주석으로 포함
+- 클래스 메서드가 아닌 **일반 함수**로 작성
+- 함수 시그니처만 작성하고 구현부는 `pass` 또는 `raise NotImplementedError`
+
+## 자료구조
+
+### 사용 규칙
+
+문제에서 자료구조(ListNode, TreeNode 등)가 필요한 경우:
+1. **문제 파일에 자체 클래스를 정의하지 않는다**
+2. **`src/common`에서 import하여 사용한다**
+3. **새로운 자료구조가 필요하면 `src/common`에 추가한다**
+
+### 사용 가능한 유틸리티
+
+**Linked List** (`src/common/linked_list.py`):
+```python
+from src.common.linked_list import ListNode, create_linked_list, create_list
+
+# ListNode 생성
+head = create_linked_list([1, 2, 3])  # 1 -> 2 -> 3
+
+# ListNode를 리스트로 변환
+arr = create_list(head)  # [1, 2, 3]
+```
+
+**Tree** (`src/common/tree.py`):
+```python
+from src.common.tree import TreeNode, list_to_tree, find_node
+
+# TreeNode 생성 (레벨 순서, None은 빈 노드)
+root = list_to_tree([1, 2, 3, None, 4])
+
+# 특정 값을 가진 노드 찾기
+node = find_node(root, 4)
+```
+
+## 테스트
+
+- **pytest** + **parametrize** 사용
+- 테스트 파일: `test/leetcode/test_{문제명}_{번호}.py`
+- LeetCode 예제를 테스트 케이스로 포함
+
+**예시**:
+```python
+import pytest
+from src.leetcode.two_sum_1 import two_sum
+
+@pytest.mark.parametrize(
+    "nums, target, expected",
+    [
+        ([2, 7, 11, 15], 9, [0, 1]),
+        ([3, 2, 4], 6, [1, 2]),
+        ([3, 3], 6, [0, 1]),
+    ],
+)
+def test_two_sum(nums: list[int], target: int, expected: list[int]):
+    assert two_sum(nums, target) == expected
+```
+
+**자료구조 테스트 시**:
+```python
+from src.common.linked_list import create_linked_list, create_list
+
+def test_merge_two_lists():
+    list1 = create_linked_list([1, 2, 4])
+    list2 = create_linked_list([1, 3, 4])
+
+    result = merge_two_lists(list1, list2)
+
+    assert create_list(result) == [1, 1, 2, 3, 4, 4]
+```
