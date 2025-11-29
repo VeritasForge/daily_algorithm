@@ -5,7 +5,7 @@ from dataclasses import dataclass
 
 @dataclass
 class TreeNode:
-    val: int
+    val: int | None
     left: TreeNode | None = None
     right: TreeNode | None = None
 
@@ -36,7 +36,7 @@ class TreeNode:
 #     return root
 
 
-def list_to_tree(nodes: list[int]) -> TreeNode | None:
+def list_to_tree(nodes: list[int | None]) -> TreeNode | None:
     if not nodes:
         return None
 
