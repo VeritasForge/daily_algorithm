@@ -14,6 +14,38 @@ A binary tree's maximum depth is the number of nodes along the longest path from
 
 
 def max_depth(root: TreeNode | None) -> int:
+    # return dfs_with_recursion(root)
+    # return def_with_stack(root)
+    return bfs(root)
+
+
+def dfs_with_recursion(root: TreeNode | None) -> int:
+    if root is None:
+        return 0
+
+    return max(dfs_with_recursion(root.left), dfs_with_recursion(root.right)) + 1
+
+
+def def_with_stack(root: TreeNode | None) -> int:
+    if root is None:
+        return 0
+
+    stack = [(root, 1)]
+    max_depth = 0
+
+    while stack:
+        node, depth = stack.pop()
+        max_depth = max(max_depth, depth)
+        if node is not None:
+            if node.right:
+                stack.append((node.right, depth + 1))
+            if node.left:
+                stack.append((node.left, depth + 1))
+
+    return max_depth
+
+
+def bfs(root: TreeNode | None) -> int:
     if root is None:
         return 0
 
