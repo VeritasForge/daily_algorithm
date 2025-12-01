@@ -24,10 +24,11 @@
 
 
 def flood_fill(image: list[list[int]], sr: int, sc: int, color: int) -> list[list[int]]:
-    if image[sr][sc] != color:  # early return
-        _dfs(image, sr, sc, color, image[sr][sc])
-
-    return image
+    # if image[sr][sc] != color:  # early return
+    #     _dfs(image, sr, sc, color, image[sr][sc])
+    #
+    # return image
+    return _dfs_with_stack(image, sr, sc, color)
 
 
 def _dfs(
@@ -49,3 +50,33 @@ def _dfs(
     _dfs(image, sr + 1, sc, color, origin_color)
     _dfs(image, sr, sc - 1, color, origin_color)
     _dfs(image, sr, sc + 1, color, origin_color)
+
+
+def _dfs_with_stack(
+    image: list[list[int]],
+    sr: int,
+    sc: int,
+    color: int,
+):
+    origin_color = image[sr][sc]
+    if origin_color == color:
+        return image
+
+    stack = [(sr, sc)]
+
+    while stack:
+        r, c = stack.pop()
+        if r < 0 or r >= len(image) or c < 0 or c >= len(image[0]):
+            continue
+
+        if image[r][c] != origin_color:
+            continue
+
+        image[r][c] = color
+
+        stack.append((r - 1, c))
+        stack.append((r + 1, c))
+        stack.append((r, c - 1))
+        stack.append((r, c + 1))
+
+    return image
