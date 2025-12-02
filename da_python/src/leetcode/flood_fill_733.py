@@ -22,13 +22,16 @@
 # - 0 <= sr < m
 # - 0 <= sc < n
 
+from collections import deque
+
 
 def flood_fill(image: list[list[int]], sr: int, sc: int, color: int) -> list[list[int]]:
     # if image[sr][sc] != color:  # early return
     #     _dfs(image, sr, sc, color, image[sr][sc])
     #
     # return image
-    return _dfs_with_stack(image, sr, sc, color)
+    # return _dfs_with_stack(image, sr, sc, color)
+    return _bfs(image, sr, sc, color)
 
 
 def _dfs(
@@ -57,7 +60,7 @@ def _dfs_with_stack(
     sr: int,
     sc: int,
     color: int,
-):
+) -> list[list[int]]:
     origin_color = image[sr][sc]
     if origin_color == color:
         return image
@@ -78,5 +81,35 @@ def _dfs_with_stack(
         stack.append((r + 1, c))
         stack.append((r, c - 1))
         stack.append((r, c + 1))
+
+    return image
+
+
+def _bfs(
+    image: list[list[int]],
+    sr: int,
+    sc: int,
+    color: int,
+) -> list[list[int]]:
+    origin_color = image[sr][sc]
+    if origin_color == color:
+        return image
+
+    q = deque([(sr, sc)])
+    while q:
+        r, c = q.popleft()
+
+        if r < 0 or r >= len(image) or c < 0 or c >= len(image[0]):
+            continue
+
+        if image[r][c] != origin_color:
+            continue
+
+        image[r][c] = color
+
+        q.append((r - 1, c))
+        q.append((r + 1, c))
+        q.append((r, c - 1))
+        q.append((r, c + 1))
 
     return image
