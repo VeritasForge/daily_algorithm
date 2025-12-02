@@ -1,31 +1,7 @@
 from __future__ import annotations
 import pytest
 
-from src.common.tree import TreeNode, find_node, list_to_tree
-
-
-# Helper function to build a tree from a list (LeetCode style)
-def build_tree(nodes: list[int | None]) -> TreeNode | None:
-    if not nodes:
-        return None
-    nodes_copy = nodes[:]  # Create a copy
-    val = nodes_copy.pop(0)
-    if val is None:
-        return None
-    root = TreeNode(val)
-    queue = [root]
-    while nodes_copy:
-        current = queue.pop(0)
-        left_val = nodes_copy.pop(0)
-        if left_val is not None:
-            current.left = TreeNode(left_val)
-            queue.append(current.left)
-        if nodes_copy:
-            right_val = nodes_copy.pop(0)
-            if right_val is not None:
-                current.right = TreeNode(right_val)
-                queue.append(current.right)
-    return root
+from src.common.tree import find_node, list_to_tree, tree_to_list
 
 
 class TestListToTree:
@@ -89,10 +65,28 @@ class TestListToTree:
         assert right_right_right is None
 
 
+class TestTreeToList:
+    @pytest.mark.parametrize(
+        "nodes",
+        [
+            [6, 2, 8, 0, 4, 7, 9, None, None, 3, 5],
+            [4, 2, 7, 1, 3, 6, 9],
+            [2, 1, 3],
+            [1, 2, 3, None, None, 4],
+        ],
+    )
+    def test_tree_to_list(self, nodes):
+        root = list_to_tree(nodes)
+
+        result = tree_to_list(root)
+
+        assert result == nodes
+
+
 class TestFindNode:
     @pytest.mark.parametrize("val", [6, 2, 8, 0, 4, 7, 9, 3, 5])
     def test_find_node(self, val: int):
-        root = build_tree([6, 2, 8, 0, 4, 7, 9, None, None, 3, 5])
+        root = list_to_tree([6, 2, 8, 0, 4, 7, 9, None, None, 3, 5])
 
         found_node = find_node(root, val)
 
@@ -101,7 +95,7 @@ class TestFindNode:
 
     @pytest.mark.parametrize("val", [1, 10])
     def test_should_return_none_there_is_no_node(self, val: int):
-        root = build_tree([6, 2, 8, 0, 4, 7, 9, None, None, 3, 5])
+        root = list_to_tree([6, 2, 8, 0, 4, 7, 9, None, None, 3, 5])
 
         found_node = find_node(root, val)
 

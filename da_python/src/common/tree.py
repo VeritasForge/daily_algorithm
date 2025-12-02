@@ -56,6 +56,50 @@ def list_to_tree(nodes: list[int | None]) -> TreeNode | None:
     return root
 
 
+# def tree_to_list(root: TreeNode | None) -> list[int | None]:
+#     if root is None:
+#         return []
+#
+#     result: list[int | None] = []
+#     q: deque[TreeNode | None] = deque([root])
+#
+#     while q:
+#         node = q.popleft()
+#         if node:
+#             result.append(node.val)
+#             q.append(node.left)
+#             q.append(node.right)
+#         else:
+#             result.append(None)
+#
+#     # Remove trailing None values
+#     while result and result[-1] is None:
+#         result.pop()
+#
+#     return result
+
+
+def tree_to_list(root: TreeNode | None) -> list[int | None]:
+    if root is None:
+        return []
+
+    res: list[int | None] = []
+    q: deque[TreeNode | None] = deque([root])
+    while q:
+        node = q.popleft()
+        if node:
+            res.append(node.val)
+            q.append(node.left)
+            q.append(node.right)
+        else:
+            res.append(None)
+
+    while res and res[-1] is None:
+        res.pop()
+
+    return res
+
+
 def find_node(root: TreeNode | None, val: int) -> TreeNode | None:
     if root is None:
         return None
