@@ -31,6 +31,39 @@ from src.common.tree import TreeNode
 
 
 def invert_tree(root: TreeNode | None) -> TreeNode | None:
+    # return _dfs(root)
+    return _dfs_with_stack(root)
+    # return _bfs(root)
+
+
+def _dfs(root: TreeNode | None) -> TreeNode | None:
+    if root is None:
+        return None
+
+    root.left, root.right = _dfs(root.right), _dfs(root.left)
+    return root
+
+
+def _dfs_with_stack(root: TreeNode | None) -> TreeNode | None:
+    if root is None:
+        return None
+
+    stack = [root]
+    while stack:
+        node = stack.pop()
+
+        node.left, node.right = node.right, node.left
+
+        if node.left:
+            stack.append(node.left)
+
+        if node.right:
+            stack.append(node.right)
+
+    return root
+
+
+def _bfs(root: TreeNode | None) -> TreeNode | None:
     if root is None:
         return None
 
