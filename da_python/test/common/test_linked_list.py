@@ -82,13 +82,20 @@ class TestCreateLinkedListWithCycle:
         assert node_2.next is node_1
 
     def test_create_linked_list_with_cycle_case_3(self):
+        head = create_linked_list_with_cycle([1], 0)
+
+        # Then:
+        assert head.val == 1
+        assert head.next is head
+
+    def test_create_linked_list_with_cycle_case_4(self):
         head = create_linked_list_with_cycle([1], -1)
 
         # Then:
         assert head.val == 1
         assert head.next is None
 
-    def test_create_linked_list_with_cycle_case_4(self):
+    def test_create_linked_list_with_cycle_case_5(self):
         head = create_linked_list_with_cycle([], -1)
 
         # Then:
