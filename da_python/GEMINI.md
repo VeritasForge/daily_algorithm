@@ -56,7 +56,7 @@ https://leetcode.com/problems/two-sum/ go
 - 파일명: `{문제_제목}_{문제_번호}.py` (snake_case)
 - 소스 파일 상단에 문제 URL, 제목, 설명을 주석으로 포함
 - 클래스 메서드가 아닌 **일반 함수**로 작성
-- 함수 시그니처만 작성하고 구현부는 `pass` 또는 `raise NotImplementedError`
+- 함수 시그니처만 작성하고 구현부는 `raise NotImplementedError`
 
 ## 자료구조
 
