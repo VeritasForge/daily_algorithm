@@ -31,12 +31,15 @@
 #     Input: root = []
 #     Output: true
 
+from collections import deque
+
 from src.common.tree import TreeNode
 
 
 def is_balanced(root: TreeNode | None) -> bool:
     # return _dfs(root) > -1
-    return _dfs_stack(root)
+    # return _dfs_stack(root)
+    return _bfs(root)
 
 
 def _dfs(node: TreeNode | None) -> int:
@@ -89,5 +92,35 @@ def _dfs_stack(root: TreeNode | None) -> bool:
 
         prev = node
         node = None
+
+    return True
+
+
+def _bfs(root: TreeNode | None) -> bool:
+    if root is None:
+        return True
+
+    nodes: list[TreeNode] = []
+    queue: deque[TreeNode] = deque([root])
+
+    while queue:
+        node = queue.popleft()
+        nodes.append(node)
+
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
+
+    heights: dict[int, int] = {}
+
+    for node in reversed(nodes):
+        left_h = heights.get(id(node.left), 0)
+        right_h = heights.get(id(node.right), 0)
+
+        if abs(left_h - right_h) > 1:
+            return False
+
+        heights[id(node)] = max(left_h, right_h) + 1
 
     return True
