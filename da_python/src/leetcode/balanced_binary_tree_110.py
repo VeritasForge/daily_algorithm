@@ -38,8 +38,8 @@ from src.common.tree import TreeNode
 
 def is_balanced(root: TreeNode | None) -> bool:
     # return _dfs(root) > -1
-    # return _dfs_stack(root)
-    return _bfs(root)
+    return _dfs_stack(root)
+    # return _bfs(root)
 
 
 def _dfs(node: TreeNode | None) -> int:
@@ -61,9 +61,6 @@ def _dfs(node: TreeNode | None) -> int:
 
 
 def _dfs_stack(root: TreeNode | None) -> bool:
-    if root is None:
-        return True
-
     stack: list[TreeNode] = []
     heights: dict[int, int] = {}
     node: TreeNode | None = root
