@@ -29,14 +29,16 @@ from src.common.tree import TreeNode
 
 
 def is_same_tree(p: TreeNode | None, q: TreeNode | None) -> bool:
-    return _bfs(p, q)
+    # return _bfs(p, q)
+    # return _dfs(p, q)
+    return _dfs_stack(p, q)
 
 
 def _bfs(p: TreeNode | None, q: TreeNode | None) -> bool:
     queue = deque([(p, q)])
 
     while queue:
-        first, second = queue.popleft()
+        first, second = queue.pop()
 
         if first is None and second is None:
             continue
@@ -46,5 +48,33 @@ def _bfs(p: TreeNode | None, q: TreeNode | None) -> bool:
 
         queue.append((first.left, second.left))
         queue.append((first.right, second.right))
+
+    return True
+
+
+def _dfs(p: TreeNode | None, q: TreeNode | None) -> bool:
+    if p is None and q is None:
+        return True
+
+    if p is None or q is None:
+        return False
+
+    return p.val == q.val and _dfs(p.left, q.left) and _dfs(p.right, q.right)
+
+
+def _dfs_stack(p: TreeNode | None, q: TreeNode | None) -> bool:
+    stack = [(p, q)]
+
+    while stack:
+        first, second = stack.pop()
+
+        if first is None and second is None:
+            continue
+
+        if (first is None or second is None) or (first.val != second.val):
+            return False
+
+        stack.append((first.right, second.right))
+        stack.append((first.left, second.left))
 
     return True
