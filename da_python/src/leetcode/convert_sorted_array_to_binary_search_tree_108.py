@@ -30,14 +30,31 @@
 from src.common.tree import TreeNode
 
 
+# def sorted_array_to_bst(nums: list[int]) -> TreeNode | None:
+#     if not nums:
+#         return None
+#
+#     mid = len(nums) // 2
+#
+#     node = TreeNode(nums[mid])
+#     node.left = sorted_array_to_bst(nums[:mid])
+#     node.right = sorted_array_to_bst(nums[mid + 1 :])
+#
+#     return node
+
+
 def sorted_array_to_bst(nums: list[int]) -> TreeNode | None:
-    if not nums:
-        return None
+    def _dfs(left: int, right: int) -> TreeNode | None:
+        if left >= right:
+            return None
 
-    mid = len(nums) // 2
+        mid = (left + right) // 2
 
-    node = TreeNode(nums[mid])
-    node.left = sorted_array_to_bst(nums[:mid])
-    node.right = sorted_array_to_bst(nums[mid + 1 :])
+        node = TreeNode(nums[mid])
 
-    return node
+        node.left = _dfs(left, mid)
+        node.right = _dfs(mid + 1, right)
+
+        return node
+
+    return _dfs(0, len(nums))
