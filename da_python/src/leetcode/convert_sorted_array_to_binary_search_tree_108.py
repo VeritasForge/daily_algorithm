@@ -43,18 +43,44 @@ from src.common.tree import TreeNode
 #     return node
 
 
+# def sorted_array_to_bst(nums: list[int]) -> TreeNode | None:
+#     def _dfs(left: int, right: int) -> TreeNode | None:
+#         if left >= right:
+#             return None
+#
+#         mid = (left + right) // 2
+#
+#         node = TreeNode(nums[mid])
+#
+#         node.left = _dfs(left, mid)
+#         node.right = _dfs(mid + 1, right)
+#
+#         return node
+#
+#     return _dfs(0, len(nums))
+
+
 def sorted_array_to_bst(nums: list[int]) -> TreeNode | None:
-    def _dfs(left: int, right: int) -> TreeNode | None:
+    mid = len(nums) // 2
+
+    root = TreeNode(nums[mid])
+    stack = [(root, True, 0, mid), (root, False, mid + 1, len(nums))]
+
+    while stack:
+        parent, is_left, left, right = stack.pop()
+
         if left >= right:
-            return None
+            continue
 
         mid = (left + right) // 2
-
         node = TreeNode(nums[mid])
 
-        node.left = _dfs(left, mid)
-        node.right = _dfs(mid + 1, right)
+        if is_left:
+            parent.left = node
+        else:
+            parent.right = node
 
-        return node
+        stack.append((node, True, left, mid))
+        stack.append((node, False, mid + 1, right))
 
-    return _dfs(0, len(nums))
+    return root
