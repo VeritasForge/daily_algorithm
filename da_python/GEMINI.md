@@ -37,26 +37,6 @@ da_python/
 - **Pythonic 코드**: 간결하고 가독성 좋은 Python 관용구 사용
 - **mypy 타입 체크 통과**: 모든 코드는 타입 에러 없이 작성
 
-## 명령어
-
-### `go` - LeetCode 문제 스캐폴딩
-
-LeetCode URL과 함께 `go` 명령을 입력하면 소스 파일과 테스트 파일을 자동 생성합니다.
-
-**사용법**:
-```
-https://leetcode.com/problems/two-sum/ go
-```
-
-**생성 결과**:
-- `src/leetcode/two_sum_1.py` - 문제 설명 주석 + 빈 함수
-- `test/leetcode/test_two_sum_1.py` - parametrize 테스트
-
-**규칙**:
-- 파일명: `{문제_제목}_{문제_번호}.py` (snake_case)
-- 소스 파일 상단에 문제 URL, 제목, 설명을 주석으로 포함
-- 클래스 메서드가 아닌 **일반 함수**로 작성
-- 함수 시그니처만 작성하고 구현부는 `raise NotImplementedError`
 
 ## 자료구조
 
