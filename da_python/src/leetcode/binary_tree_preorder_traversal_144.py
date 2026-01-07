@@ -48,21 +48,57 @@ from src.common.tree import TreeNode
 #     return [root.val] + preorder_traversal(root.left) + preorder_traversal(root.right)
 
 
+# def preorder_traversal(root: TreeNode | None) -> list[int | None]:
+#     if root is None:
+#         return []
+#
+#     result: list[int | None] = []
+#     stack: list[TreeNode | None] = [root]
+#
+#     while stack:
+#         node = stack.pop()
+#         if node is None:
+#             continue
+#
+#         result.append(node.val)
+#
+#         stack.append(node.right)
+#         stack.append(node.left)
+#
+#     return result
+
+
+# def preorder_traversal(root: TreeNode | None) -> list[int | None]:
+#     stack: list[TreeNode | None] = [root]
+#     res: list[int | None] = []
+#
+#     while stack:
+#         node = stack.pop()
+#
+#         if node is None:
+#             continue
+#
+#         res.append(node.val)
+#         stack.append(node.right)
+#         stack.append(node.left)
+#
+#     return res
+
+
 def preorder_traversal(root: TreeNode | None) -> list[int | None]:
     if root is None:
         return []
 
-    result: list[int | None] = []
     stack: list[TreeNode | None] = [root]
+    res: list[int | None] = []
 
     while stack:
         node = stack.pop()
-        if node is None:
-            continue
+        res.append(node.val)
 
-        result.append(node.val)
+        if node.right:
+            stack.append(node.right)
+        if node.left:
+            stack.append(node.left)
 
-        stack.append(node.right)
-        stack.append(node.left)
-
-    return result
+    return res
