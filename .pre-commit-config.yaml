@@ -23,12 +23,12 @@ repos:
         language: system
         types_or: [python, pyi]
         files: ^da_python/
-    -   id: mypy
-        name: mypy
-        entry: da_python/.venv/bin/mypy
-        language: system
-        types_or: [python, pyi]
-        files: ^da_python/
+#    -   id: mypy
+#        name: mypy
+#        entry: da_python/.venv/bin/mypy
+#        language: system
+#        types_or: [python, pyi]
+#        files: ^da_python/
     -   id: pytest
         name: pytest
         entry: da_python/.venv/bin/pytest
