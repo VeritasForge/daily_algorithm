@@ -64,8 +64,7 @@ def postorder_traversal(root: TreeNode | None) -> list[int | None]:
         if curr.right is None or curr.right == prev:
             res.append(curr.val)
             stack.pop()
-            prev = curr
-            curr = None
+            prev, curr = curr, None
         else:
             curr = curr.right
 
