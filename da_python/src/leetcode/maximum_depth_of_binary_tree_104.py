@@ -13,47 +13,36 @@ A binary tree's maximum depth is the number of nodes along the longest path from
 """
 
 
+# def max_depth(root: TreeNode | None) -> int:
+#     if root is None:
+#         return 0
+#
+#     return max(max_depth(root.left), max_depth(root.right)) + 1
+
+
+# def max_depth(root: TreeNode | None) -> int:
+#     stack, max_depth = [(root, 1)], 0
+#     while stack:
+#         curr, depth = stack.pop()
+#         if curr is None:
+#             continue
+#
+#         max_depth = max(depth, max_depth)
+#
+#         stack.append((curr.left, max_depth + 1))
+#         stack.append((curr.right, max_depth + 1))
+#
+#     return max_depth
+
+
 def max_depth(root: TreeNode | None) -> int:
-    # return dfs_with_recursion(root)
-    # return def_with_stack(root)
-    return bfs(root)
-
-
-def dfs_with_recursion(root: TreeNode | None) -> int:
     if root is None:
         return 0
 
-    return max(dfs_with_recursion(root.left), dfs_with_recursion(root.right)) + 1
-
-
-def def_with_stack(root: TreeNode | None) -> int:
-    if root is None:
-        return 0
-
-    stack = [(root, 1)]
-    max_depth = 0
-
-    while stack:
-        node, depth = stack.pop()
-        max_depth = max(max_depth, depth)
-        if node is not None:
-            if node.right:
-                stack.append((node.right, depth + 1))
-            if node.left:
-                stack.append((node.left, depth + 1))
-
-    return max_depth
-
-
-def bfs(root: TreeNode | None) -> int:
-    if root is None:
-        return 0
-
-    q = deque([root])
-    dept = 0
+    q, depth = deque([root]), 0
 
     while q:
-        dept += 1
+        depth += 1
         for _ in range(len(q)):
             node = q.popleft()
             if node.left:
@@ -61,4 +50,4 @@ def bfs(root: TreeNode | None) -> int:
             if node.right:
                 q.append(node.right)
 
-    return dept
+    return depth
