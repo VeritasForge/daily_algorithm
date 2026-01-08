@@ -30,53 +30,41 @@ from collections import deque
 from src.common.tree import TreeNode
 
 
+# def invert_tree(root: TreeNode | None) -> TreeNode | None:
+#     if root is None:
+#         return
+#
+#     root.left, root.right = invert_tree(root.right), invert_tree(root.left)
+#     return root
+
+
+# def invert_tree(root: TreeNode | None) -> TreeNode | None:
+#     stack = [root]
+#
+#     while stack:
+#         curr = stack.pop()
+#         if curr is None:
+#             continue
+#
+#         curr.left, curr.right = curr.right, curr.left
+#
+#         stack.append(curr.right)
+#         stack.append(curr.left)
+#
+#     return root
+
+
 def invert_tree(root: TreeNode | None) -> TreeNode | None:
-    # return _dfs(root)
-    return _dfs_with_stack(root)
-    # return _bfs(root)
-
-
-def _dfs(root: TreeNode | None) -> TreeNode | None:
-    if root is None:
-        return None
-
-    root.left, root.right = _dfs(root.right), _dfs(root.left)
-    return root
-
-
-def _dfs_with_stack(root: TreeNode | None) -> TreeNode | None:
-    if root is None:
-        return None
-
-    stack = [root]
-    while stack:
-        node = stack.pop()
-
-        node.left, node.right = node.right, node.left
-
-        if node.left:
-            stack.append(node.left)
-
-        if node.right:
-            stack.append(node.right)
-
-    return root
-
-
-def _bfs(root: TreeNode | None) -> TreeNode | None:
-    if root is None:
-        return None
-
     q = deque([root])
+
     while q:
-        node = q.popleft()
+        curr = q.popleft()
+        if curr is None:
+            continue
 
-        node.left, node.right = node.right, node.left
+        curr.left, curr.right = curr.right, curr.left
 
-        if node.left:
-            q.append(node.left)
-
-        if node.right:
-            q.append(node.right)
+        q.append(curr.left)
+        q.append(curr.right)
 
     return root
