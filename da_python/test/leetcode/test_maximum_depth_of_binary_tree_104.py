@@ -11,6 +11,7 @@ from src.leetcode.maximum_depth_of_binary_tree_104 import max_depth
         ([1, None, 2], 2),
         ([], 0),
         ([0], 1),
+        ([1, 2, 3, 4, None, None, 5], 3),
     ],
 )
 def test_max_depth(nodes, expected):
