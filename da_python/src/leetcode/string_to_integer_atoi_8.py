@@ -47,12 +47,12 @@ def my_atoi(s: str) -> int:
 
     num = 0
     while idx < len(s) and s[idx].isdigit():
-        num = num * 10 + int(s[idx])
+        num = num * 10 + int(s[idx]) * sign
         idx += 1
 
-        if sign * num <= INT_MIN:
+        if num <= INT_MIN:
             return INT_MIN
-        if sign * num >= INT_MAX:
+        if num >= INT_MAX:
             return INT_MAX
 
-    return num * sign
+    return num
