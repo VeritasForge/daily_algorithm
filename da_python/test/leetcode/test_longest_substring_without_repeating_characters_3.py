@@ -22,6 +22,7 @@ from src.leetcode.longest_substring_without_repeating_characters_3 import (
         (" ", 1),
         # 모든 문자가 고유한 경우
         ("abcdef", 6),
+        ("abba", 2),
     ],
 )
 def test_length_of_longest_substring(s: str, expected: int) -> None:
