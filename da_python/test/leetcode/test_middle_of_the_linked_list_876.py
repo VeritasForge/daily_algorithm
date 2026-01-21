@@ -1,6 +1,6 @@
 import pytest
 
-from src.common.linked_list import ListNode, create_linked_list, create_list
+from src.common.linked_list import create_linked_list, create_list
 from src.leetcode.middle_of_the_linked_list_876 import middle_node
 
 
