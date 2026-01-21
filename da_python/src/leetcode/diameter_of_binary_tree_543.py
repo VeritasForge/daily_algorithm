@@ -38,11 +38,10 @@ def diameter_of_binary_tree(root: TreeNode | None) -> int:
         left_depth = f(node.left)
         right_depth = f(node.right)
 
-        diameter = left_depth  + right_depth
+        diameter = left_depth + right_depth
         max_diameter = max(max_diameter, diameter)
 
         return max(left_depth, right_depth) + 1
 
     f(root)
     return max_diameter
-
