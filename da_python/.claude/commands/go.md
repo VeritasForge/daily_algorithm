@@ -1,34 +1,77 @@
 ---
 description: LeetCode 문제 스캐폴딩 (소스 + 테스트 파일 생성)
 argument-hint: <leetcode-url>
+allowed-tools: Bash, Read, Write, Glob
 ---
 
 # LeetCode 문제 스캐폴딩
 
-LeetCode URL: $1
+LeetCode URL: $ARGUMENTS
 
 ## 작업 순서
 
-1. **URL에서 문제 정보 추출**
-   - 문제 번호
-   - 문제 제목 (snake_case로 변환)
+### Step 1: URL에서 titleSlug 추출
 
-2. **LeetCode 페이지에서 정보 수집**
-   - 문제 설명
-   - 함수 시그니처
-   - 예제 입출력
+URL에서 `titleSlug`를 추출합니다.
+- `https://leetcode.com/problems/two-sum/` → `two-sum`
+- `https://leetcode.com/problems/two-sum/description/` → `two-sum`
 
-3. **소스 파일 생성**: `src/leetcode/{문제명}_{번호}.py`
-   - 상단 주석: URL, 제목, 난이도, 문제 설명
-   - 일반 함수로 작성 (클래스 메서드 X)
-   - 함수 시그니처만 작성, 구현부는 `raise NotImplementedError`
-   - Type hint: Python 3.9+ 스타일 (`list[int]`, `TreeNode | None`)
-   - 자료구조 필요시 `src/common`에서 import
+### Step 2: GraphQL API로 문제 정보 수집
 
-4. **테스트 파일 생성**: `test/leetcode/test_{문제명}_{번호}.py`
-   - pytest + parametrize 사용
-   - LeetCode 예제를 테스트 케이스로 포함
-   - 자료구조 필요시 헬퍼 함수 import (`create_linked_list`, `list_to_tree` 등)
+다음 bash 명령어로 문제 정보를 가져옵니다:
+
+```bash
+curl -s -X POST "https://leetcode.com/graphql" \
+  -H "Content-Type: application/json" \
+  -d '{"query":"query { question(titleSlug: \"<titleSlug>\") { questionId title titleSlug difficulty content codeSnippets { lang langSlug code } }}"}'
+```
+
+응답에서 추출할 정보:
+- `questionId`: 문제 번호
+- `title`: 문제 제목
+- `difficulty`: 난이도 (Easy/Medium/Hard)
+- `content`: 문제 설명 (HTML → 텍스트로 변환)
+- `codeSnippets`: `langSlug == "python3"`인 항목에서 함수 시그니처 추출
+
+### Step 3: 함수 시그니처 변환
+
+LeetCode의 `class Solution` 메서드를 일반 함수로 변환합니다:
+- `class Solution:` 제거
+- `def twoSum(self, ...)` → `def two_sum(...)` (camelCase → snake_case, self 제거)
+- Type hint 변환: `List[int]` → `list[int]`, `Optional[TreeNode]` → `TreeNode | None`
+- `from typing import ...` 제거
+
+### Step 4: 소스 파일 생성
+
+파일: `src/leetcode/{snake_case_title}_{번호}.py`
+
+```python
+"""
+{번호}. {제목}
+https://leetcode.com/problems/{titleSlug}/
+
+Difficulty: {난이도}
+
+문제 설명:
+    {content를 텍스트로 변환하여 정리}
+
+제약 조건:
+    {constraints 정리}
+"""
+
+# 자료구조 필요시 import
+
+def {함수명}({파라미터}) -> {반환타입}:
+    raise NotImplementedError
+```
+
+### Step 5: 테스트 파일 생성
+
+파일: `test/leetcode/test_{snake_case_title}_{번호}.py`
+
+- pytest + parametrize 사용
+- GraphQL 응답의 `content`에서 Example 입출력을 파싱하여 테스트 케이스 생성
+- 자료구조 필요시 헬퍼 함수 import
 
 ## 파일명 규칙
 
