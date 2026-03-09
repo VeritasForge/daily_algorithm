@@ -70,8 +70,35 @@ def {함수명}({파라미터}) -> {반환타입}:
 파일: `test/leetcode/test_{snake_case_title}_{번호}.py`
 
 - pytest + parametrize 사용
-- GraphQL 응답의 `content`에서 Example 입출력을 파싱하여 테스트 케이스 생성
 - 자료구조 필요시 헬퍼 함수 import
+- 테스트 케이스는 카테고리별 주석과 함께 구성
+
+#### 테스트 케이스 구성 규칙
+
+LeetCode Example만 넣지 말고, 아래 카테고리를 모두 고려하여 테스트 케이스를 확장한다:
+
+1. **기본 예제**: GraphQL `content`의 Example 입출력
+2. **엣지 케이스**: 제약 조건의 경계값, 최솟값/최댓값, 빈 입력, 단일 원소 등
+3. **예외 케이스**: 음수, 0, 특수한 입력 등 함정이 될 수 있는 케이스
+4. **추가 검증**: 기본 예제에서 다루지 않은 일반적인 True/False 케이스
+
+각 카테고리는 주석으로 구분한다:
+
+```python
+@pytest.mark.parametrize(
+    "params, expected",
+    [
+        # 기본 예제
+        (...),
+        # True 케이스
+        (...),
+        # False 케이스
+        (...),
+        # 엣지 케이스
+        (...),
+    ],
+)
+```
 
 ## 파일명 규칙
 
