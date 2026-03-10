@@ -17,4 +17,21 @@ Follow up:
 
 
 def is_power_of_three(n: int) -> bool:
-    raise NotImplementedError
+    return n > 0 and (3**31) % n == 0
+
+
+# def is_power_of_three(n: int) -> bool:
+#     if n <= 0:
+#         return False
+#
+#     while n % 3 == 0:
+#         n //= 3
+#
+#     return n == 1
+#
+
+# def is_power_of_three(n: int) -> bool:
+#     if n <= 0:
+#         return False
+#
+#     return n == 1 or (n % 3 == 0 and is_power_of_three(n // 3))
