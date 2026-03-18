@@ -17,7 +17,15 @@ Follow up:
 
 
 def is_power_of_three(n: int) -> bool:
-    return n > 0 and (3**31) % n == 0
+    return n > 0 and 3**19 % n == 0
+
+
+# def is_power_of_three(n: int) -> bool:
+#     max_exp = round(math.log(2 ** 31 - 1, 3))
+#     while 2 ** 31 - 1 < 3 ** max_exp:
+#         max_exp -= 1
+#
+#     return n > 0 and 3 **  max_exp % n == 0
 
 
 # def is_power_of_three(n: int) -> bool:
