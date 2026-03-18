@@ -34,37 +34,19 @@
 
 
 def decode_string(s: str) -> str:
-    stack: list[tuple[int, list[str]]] = []
-    open_stack: list[bool] = []
-    is_nested: bool = False
-    res: str = ""
+    stack: list[tuple[str, int]] = []
+    n, word = 0, ""
 
     for c in s:
-        if c == "[":
-            open_stack.append(True)
-            is_nested = len(open_stack) > 1
-        elif c == "]":  # close
-            num, chars = stack.pop()
-            open_stack.pop()
-
-            if is_nested:
-                res = num * ("".join(chars) + res)
-            else:
-                res += num * "".join(chars)
-
-            if len(open_stack) == 0:
-                is_nested = False
-        elif not open_stack:
-            if c.isdigit():
-                stack.append((int(c), []))
-            else:
-                res += c
-        elif open_stack[-1]:
-            if c.isdigit():
-                stack.append((int(c), []))
-            else:
-                stack[-1][1].append(c)
+        if c.isdigit():
+            n = n * 10 + int(c)
+        elif c == "[":
+            stack.append((word, n))
+            n, word = 0, ""
+        elif c == "]":
+            s_word, s_n = stack.pop()
+            word = s_word + (s_n * word)
         else:
-            raise ValueError(f"Unexpected Value: {c}")
+            word += c
 
-    return res
+    return word
