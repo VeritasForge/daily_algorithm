@@ -98,4 +98,7 @@ dmypy.json
 .vscode/
 
 # PyCharm
-.idea/ 
+.idea/
+
+# Zed
+.zed/

@@ -1,7 +1,9 @@
 ---
+name: go
 description: LeetCode 문제 스캐폴딩 (소스 + 테스트 파일 생성)
 argument-hint: <leetcode-url>
 allowed-tools: Bash, Read, Write, Glob
+disable-model-invocation: true
 ---
 
 # LeetCode 문제 스캐폴딩

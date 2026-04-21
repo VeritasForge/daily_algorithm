@@ -1,6 +1,8 @@
 ---
+name: commit
 description: 변경사항을 커밋하고 원격 저장소로 푸시합니다.
 allowed-tools: Bash, Read, Grep, Glob
+disable-model-invocation: true
 ---
 
 # Commit & Push Changes
