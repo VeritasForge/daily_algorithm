@@ -117,6 +117,7 @@ node = find_node(root, 4)
 
 ## 테스트
 
+- **실행 명령**: `uv run pytest` (pyenv shim이나 시스템 python3 사용 금지)
 - **pytest** + **parametrize** 사용
 - 테스트 파일: `test/leetcode/test_{문제명}_{번호}.py`
 - LeetCode 예제를 테스트 케이스로 포함
