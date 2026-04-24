@@ -4,8 +4,6 @@ from src.leetcode.decrypt_string_from_alphabet_to_integer_mapping_1309 import (
     freq_alphabets,
 )
 
-pytestmark = pytest.mark.skip(reason="WIP")
-
 
 @pytest.mark.parametrize(
     "s, expected",

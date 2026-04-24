@@ -22,4 +22,54 @@ Difficulty: Easy
 
 
 def freq_alphabets(s: str) -> str:
-    raise NotImplementedError
+    i, res = 0, []
+
+    while i < len(s):
+        if i + 2 < len(s) and s[i + 2] == "#":
+            res.append(chr(int(s[i : i + 2]) + ord("a") - 1))
+            i += 3
+        else:
+            res.append(chr(int(s[i]) + ord("a") - 1))
+            i += 1
+
+    return "".join(res)
+
+
+# import string
+
+# def freq_alphabets(s: str) -> str:
+#     i, res = 0, []
+#
+#     while i < len(s):
+#         if i + 2 < len(s) and s[i + 2] == "#":
+#             ch_idx = s[i : i + 2]
+#             i += 3
+#         else:
+#             ch_idx = s[i]
+#             i += 1
+#
+#         res.append(string.ascii_lowercase[int(ch_idx) - 1])
+#
+#     return "".join(res)
+
+
+# def freq_alphabets(s: str) -> str:
+#     i, res = len(s) - 1, []
+#
+#     while i >= 0:
+#         if s[i] == "#":
+#             ch_idx = int(s[i - 2 : i])
+#             i -= 3
+#         else:
+#             ch_idx = int(s[i])
+#             i -= 1
+#
+#         res.append(string.ascii_lowercase[ch_idx - 1])
+#
+#     return "".join(res[::-1])
+
+
+# def freq_alphabets(s: str) -> str:
+#     for i in range(26, 0, -1):
+#         s = s.replace(str(i) + ("#" * (i > 9)), chr(96 + i))
+#     return s
