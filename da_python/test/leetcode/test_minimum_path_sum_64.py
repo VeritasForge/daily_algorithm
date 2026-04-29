@@ -2,8 +2,6 @@ import pytest
 
 from src.leetcode.minimum_path_sum_64 import min_path_sum
 
-pytestmark = pytest.mark.skip(reason="WIP")
-
 
 @pytest.mark.parametrize(
     "grid, expected",
