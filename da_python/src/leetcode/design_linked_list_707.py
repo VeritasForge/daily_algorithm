@@ -42,7 +42,9 @@ class MyLinkedList:
     def __init__(self) -> None:
         self.head: Node = Node(0)
         self.tail: Node = Node(0)
-        self.count = 0
+        self.head.next = self.tail
+        self.tail.prev = self.head
+        self.count: int = 0
 
     def get(self, index: int) -> int:
         found = self._find(index)
@@ -52,32 +54,27 @@ class MyLinkedList:
         return found.val
 
     def add_at_head(self, val: int) -> None:
-        if self.count == 0:
-            assert self.head.next is None and self.tail.prev is None
-            self.head.next = self.tail.prev = Node(val, self.head, self.tail)
-        else:
-            node = Node(val, prev=self.head, next=self.head.next)
-            assert self.head.next
-            self.head.next.prev = node
-            self.head.next = node
+        nxt = self.head.next
+        assert nxt is not None
+
+        node = Node(val, self.head, nxt)
+        self.head.next = node
+        nxt.prev = node
 
         self.count += 1
 
     def add_at_tail(self, val: int) -> None:
-        if self.count == 0:
-            assert self.head.next is None and self.tail.prev is None
-            self.head.next = self.tail.prev = Node(val, self.head, self.tail)
-        else:
-            node = Node(val, self.tail.prev, self.tail)
-            assert self.tail.prev
-            self.tail.prev.next = node
-            self.tail.prev = node
+        prev = self.tail.prev
+        assert prev is not None
+
+        node = Node(val, prev, self.tail)
+        self.tail.prev = node
+        prev.next = node
 
         self.count += 1
 
     def add_at_index(self, index: int, val: int) -> None:
-        if self.count == 0:
-            self.add_at_head(val)
+        if index < 0 or index > self.count:
             return
 
         if self.count == index:
@@ -85,11 +82,8 @@ class MyLinkedList:
             return
 
         found = self._find(index)
-        if found is None:
-            return
-
+        assert found is not None and found.prev is not None
         node = Node(val, found.prev, found)
-        assert found.prev is not None
         found.prev.next = node
         found.prev = node
 
@@ -107,13 +101,21 @@ class MyLinkedList:
         self.count -= 1
 
     def _find(self, index: int) -> Node | None:
-        # if self.head.next is None or self.count - 1 < index or index < 0:
-        if self.count - 1 < index or index < 0:
+        if index < 0 or index >= self.count:
             return None
 
-        curr = self.head.next
-        while index > 0 and curr is not None:
-            curr = curr.next
-            index -= 1
+        if index <= self.count // 2:
+            curr = self.head.next
+            for _ in range(index):
+                assert curr is not None
+                curr = curr.next
+        else:
+            curr = self.tail.prev
+            for _ in range(self.count - 1 - index):
+                assert curr is not None
+                curr = curr.prev
 
         return curr
+
+    def __len__(self) -> int:
+        return self.count
