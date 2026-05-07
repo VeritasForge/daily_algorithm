@@ -43,14 +43,14 @@ def first_bad_version(n: int, is_bad_version: Callable[[int], bool]) -> int:
     Returns:
         The first bad version number
     """
-    left, right = 0, n - 1
+    left, right = 1, n
     bad_version = 0
 
     while left <= right:
         mid = (left + right) // 2
 
-        if is_bad_version(mid + 1):  # version >= bad
-            bad_version = mid + 1
+        if is_bad_version(mid):  # version >= bad
+            bad_version = mid
             right = mid - 1
         else:
             left = mid + 1
