@@ -42,8 +42,7 @@ class MyLinkedList:
     def __init__(self) -> None:
         self.head: Node = Node(0)
         self.tail: Node = Node(0)
-        self.head.next = self.tail
-        self.tail.prev = self.head
+        self.head.next, self.tail.prev = self.tail, self.head
         self.count: int = 0
 
     def get(self, index: int) -> int:
@@ -58,8 +57,7 @@ class MyLinkedList:
         assert nxt is not None
 
         node = Node(val, self.head, nxt)
-        self.head.next = node
-        nxt.prev = node
+        self.head.next = nxt.prev = node
 
         self.count += 1
 
@@ -68,8 +66,7 @@ class MyLinkedList:
         assert prev is not None
 
         node = Node(val, prev, self.tail)
-        self.tail.prev = node
-        prev.next = node
+        self.tail.prev = prev.next = node
 
         self.count += 1
 
@@ -84,8 +81,7 @@ class MyLinkedList:
         found = self._find(index)
         assert found is not None and found.prev is not None
         node = Node(val, found.prev, found)
-        found.prev.next = node
-        found.prev = node
+        found.prev.next = found.prev = node
 
         self.count += 1
 
@@ -95,9 +91,7 @@ class MyLinkedList:
             return
 
         assert found.prev is not None and found.next is not None
-        found.prev.next = found.next
-        found.next.prev = found.prev
-
+        found.prev.next, found.next.prev = found.next, found.prev
         self.count -= 1
 
     def _find(self, index: int) -> Node | None:
