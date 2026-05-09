@@ -47,26 +47,18 @@ class MyLinkedList:
 
     def get(self, index: int) -> int:
         found = self._find(index)
-        if found is None:
-            return -1
-
-        return found.val
+        return -1 if found is None else found.val
 
     def add_at_head(self, val: int) -> None:
-        nxt = self.head.next
-        assert nxt is not None
-
-        node = Node(val, self.head, nxt)
-        self.head.next = nxt.prev = node
-
+        node = Node(val, self.head, self.head.next)
+        assert self.head.next is not None
+        self.head.next.prev = self.head.next = node
         self.count += 1
 
     def add_at_tail(self, val: int) -> None:
-        prev = self.tail.prev
-        assert prev is not None
-
-        node = Node(val, prev, self.tail)
-        self.tail.prev = prev.next = node
+        node = Node(val, self.tail.prev, self.tail)
+        assert self.tail.prev is not None
+        self.tail.prev.next = self.tail.prev = node
 
         self.count += 1
 
