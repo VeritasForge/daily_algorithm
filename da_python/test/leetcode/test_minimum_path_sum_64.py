@@ -24,6 +24,7 @@ from src.leetcode.minimum_path_sum_64 import min_path_sum
         ([[1, 1], [100, 1]], 3),
         # 보강 - 최댓값 경계
         ([[200, 200], [200, 200]], 600),
+        ([[100, 100, 100, 100]], 400),
     ],
 )
 def test_min_path_sum(grid: list[list[int]], expected: int) -> None:
