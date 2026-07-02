@@ -30,9 +30,29 @@ def has_path_sum(root: TreeNode | None, target_sum: int) -> bool:
     if root is None:
         return False
 
-    remaining = target_sum - (0 if root.val is None else root.val)
+    stack = [(root, target_sum)]
+    while stack:
+        curr, remaining = stack.pop()
+        remaining -= curr.val or 0
 
-    if root.left is None and root.right is None:
-        return remaining == 0
+        if curr.left is None and curr.right is None and remaining == 0:
+            return True
 
-    return has_path_sum(root.left, remaining) or has_path_sum(root.right, remaining)
+        if curr.right is not None:
+            stack.append((curr.right, remaining))
+        if curr.left is not None:
+            stack.append((curr.left, remaining))
+
+    return False
+
+
+# def has_path_sum(root: TreeNode | None, target_sum: int) -> bool:
+#     if root is None:
+#         return False
+
+#     remaining = target_sum - (0 if root.val is None else root.val)
+
+#     if root.left is None and root.right is None:
+#         return remaining == 0
+
+#     return has_path_sum(root.left, remaining) or has_path_sum(root.right, remaining)
