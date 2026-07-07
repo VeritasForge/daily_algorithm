@@ -59,3 +59,32 @@ def create_linked_list_with_cycle(values: list[int], pos: int) -> ListNode | Non
     tail.next = start_cycle
 
     return head
+
+
+def create_intersecting_lists(
+    list_a: list[int], list_b: list[int], skip_a: int, skip_b: int
+) -> tuple[ListNode | None, ListNode | None]:
+    """Create two linked lists sharing a common tail starting at the given skip indices.
+
+    Args:
+        list_a: Full values of list A (including the shared tail).
+        list_b: Full values of list B (including the shared tail).
+        skip_a: Number of list A's own nodes before the shared tail (len(list_a) if none).
+        skip_b: Number of list B's own nodes before the shared tail (len(list_b) if none).
+
+    Returns:
+        Tuple of (head_a, head_b).
+    """
+    tail = create_linked_list(list_a[skip_a:])
+
+    def prepend(values: list[int], tail_node: ListNode | None) -> ListNode | None:
+        if not values:
+            return tail_node
+
+        head = curr = ListNode(values[0])
+        for val in values[1:]:
+            curr.next = curr = ListNode(val)
+        curr.next = tail_node
+        return head
+
+    return prepend(list_a[:skip_a], tail), prepend(list_b[:skip_b], tail)
