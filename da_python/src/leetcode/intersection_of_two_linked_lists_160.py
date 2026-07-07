@@ -24,17 +24,33 @@ Follow up: O(m + n) 시간, O(1) 공간으로 풀 수 있나요?
 
 from src.common.linked_list import ListNode
 
+# def get_intersection_node(
+#     head_a: ListNode | None, head_b: ListNode | None
+# ) -> ListNode | None:
+#     a, b = head_a, head_b
+
+#     while a is not b:
+#         a = head_b if a is None else a.next
+#         b = head_a if b is None else b.next
+
+#     return a
+
 
 def get_intersection_node(
     head_a: ListNode | None, head_b: ListNode | None
 ) -> ListNode | None:
-    if head_a is None or head_b is None:
-        return None
+    visited_id = set()
 
-    a, b = head_a, head_b
+    node = head_a
+    while node is not None:
+        visited_id.add(id(node))
+        node = node.next
 
-    while a is not b:
-        a = head_b if a is None else a.next
-        b = head_a if b is None else b.next
+    node = head_b
+    while node is not None:
+        if id(node) in visited_id:
+            return node
 
-    return a
+        node = node.next
+
+    return None
