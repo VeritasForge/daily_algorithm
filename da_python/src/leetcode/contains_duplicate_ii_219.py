@@ -31,10 +31,18 @@ Difficulty: Easy
 """
 
 
+# def contains_nearby_duplicate(nums: list[int], k: int) -> bool:
+#     seen = {}
+#     for i, n in enumerate(nums):
+#         if n in seen and abs(seen[n] - i) <= k:
+#             return True
+#         seen[n] = i
+#     return False
+
 def contains_nearby_duplicate(nums: list[int], k: int) -> bool:
     seen = {}
     for i, n in enumerate(nums):
-        if n in seen and abs(seen[n] - i) <= k:
+        if (idx := seen.get(n)) is not None and abs(idx - i) <= k:
             return True
         seen[n] = i
     return False
